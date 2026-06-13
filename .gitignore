@@ -1,9 +1,11 @@
-# Glade application + runtime (never commit the tool itself)
+# Glade application binaries (install Glade separately)
 glade.exe
 gemini.exe
 fastcap.exe
+MetaPlacerTest0.exe
+
+# Glade-bundled runtime (comes with Glade install)
 Python27/
-lib/
 platforms/
 imageformats/
 printsupport/
@@ -17,11 +19,6 @@ glade_*.log
 gladerc.xml*
 glade.qss
 .glade.py
-
-# Glade scratch / temp
-temp/
-verifications/drc/*.txt
-verifications/lvs/*.txt
 
 # Editor / OS
 .DS_Store
