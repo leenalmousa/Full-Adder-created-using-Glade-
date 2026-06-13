@@ -41,16 +41,16 @@ This repo does not include the Glade application, the C5N PDK, or any Glade-ship
 | `schematic.cdl`            | SPICE-like netlist of the schematic view (text — open anywhere). |
 | `layout.cdl`                | Netlist generated from the layout view (text). |
 | `extracted.cdl`             | Netlist back-extracted from the layout, with real transistor sizes (text). |
-| `lvs.txt`                   | LVS (Layout vs. Schematic) report &mdash; *clean* means the layout matches the schematic transistor-for-transistor. |
-| `glade_cellview/schematic`  | Glade binary cell view &mdash; the schematic geometry. Only openable in Glade. |
-| `glade_cellview/layout`     | Glade binary cell view &mdash; the layout polygon data. Only openable in Glade. |
-| `glade_cellview/extracted`  | Glade binary cell view &mdash; the back-extracted layout. Only openable in Glade. |
+| `lvs.txt`                   | LVS (Layout vs. Schematic) report  ; *clean* means the layout matches the schematic transistor-for-transistor. |
+| `glade_cellview/schematic`  | Glade binary cell view  ; the schematic geometry. Only openable in Glade. |
+| `glade_cellview/layout`     | Glade binary cell view  ; the layout polygon data. Only openable in Glade. |
+| `glade_cellview/extracted`  | Glade binary cell view  ; the back-extracted layout. Only openable in Glade. |
 
-> The `.cdl` and `.txt` files are plain text. The files inside `glade_cellview/` are Glade binary blobs (no file extension) that carry the polygon-level geometry &mdash; only Glade can open them.
+> The `.cdl` and `.txt` files are plain text. The files inside `glade_cellview/` are Glade binary blobs (no file extension) that carry the polygon-level geometry  ; only Glade can open them.
 
 **Cells with a different shape:**
-- `latch/` has only `glade_cellview/{schematic, layout, extracted}` &mdash; no netlist export.
-- `tap/` has only `glade_cellview/layout` &mdash; a standalone well/substrate tap cell, no schematic counterpart.
+- `latch/` has only `glade_cellview/{schematic, layout, extracted}`  ; no netlist export.
+- `tap/` has only `glade_cellview/layout`  ; a standalone well/substrate tap cell, no schematic counterpart.
 
 
 
@@ -103,8 +103,8 @@ This repo does not include the Glade application, the C5N PDK, or any Glade-ship
 <td width="50%" valign="top"><img src="figures/full_adder_layout.png" alt="Full adder layout"/></td>
 </tr>
 <tr>
-<td align="center"><em>Full-adder schematic &mdash; composed from the verified gates</em></td>
-<td align="center"><em>Full-adder layout &mdash; the polygon-level assembly that ties out to <code>SUM</code> and <code>CARRY</code></em></td>
+<td align="center"><em>Full-adder schematic  ; composed from the verified gates</em></td>
+<td align="center"><em>Full-adder layout  ; the polygon-level assembly that ties out to <code>SUM</code> and <code>CARRY</code></em></td>
 </tr>
 </table>
 
@@ -112,27 +112,27 @@ This repo does not include the Glade application, the C5N PDK, or any Glade-ship
 
 Every cell is run through the full **DRC → LPE → LVS** sign off flow before being reused in a higher level block. All three steps come back clean for every gate and for the assembled full adder.
 
-### 1. DRC &mdash; Design Rule Check
+### 1. DRC  ; Design Rule Check
 
 DRC scans the layout polygons against the C5N PDK's geometric rules (minimum width, spacing, enclosure, antenna, overlap, etc.). A run that finishes with **"No DRC errors were found"** means the layout is manufacturable.
 
 <p align="center">
   <img src="figures/drc_clean_full_adder.png" alt="Glade DRC report — no errors on the full adder" width="600"/><br/>
-  <em>DRC sign off on the full adder &mdash; "No DRC errors were found" across every layer (VIA23, M3, overglass, etc.).</em>
+  <em>DRC sign off on the full adder  ; "No DRC errors were found" across every layer (VIA23, M3, overglass, etc.).</em>
 </p>
 
-### 2. LPE &mdash; Layout Parameter Extraction
+### 2. LPE  ; Layout Parameter Extraction
 
 LPE walks the layout, recognises the transistor patterns, and writes a **device level netlist back out** with real W/L sizing and source/drain area &amp; perimeter parasitics. This extracted netlist is what LVS compares against the schematic.
 
 <p align="center">
   <img src="figures/lpe_full_adder.png" alt="Glade LPE extraction completed for the full adder" width="600"/><br/>
-  <em>LPE completes on the full adder &mdash; MOS devices extracted and the <code>extracted</code> cellview is opened for inspection.</em>
+  <em>LPE completes on the full adder  ; MOS devices extracted and the <code>extracted</code> cellview is opened for inspection.</em>
 </p>
 
 The text netlists this produces are in each gate folder as `extracted.cdl`.
 
-### 3. LVS &mdash; Layout vs. Schematic
+### 3. LVS  ; Layout vs. Schematic
 
 LVS feeds the extracted netlist into the Gemini engine and compares it, device for device, against the schematic netlist. A clean run means the layout you drew implements exactly the circuit you intended.
 
@@ -155,18 +155,18 @@ LVS feeds the extracted netlist into the Gemini engine and compares it, device f
 
 
 
-## Note &mdash; running this yourself
+## Note  ; running this yourself
 
 This repo is a **showcase of my work**, not a turn key Glade project. To open the cells and rerun DRC / LPE / LVS yourself you also need:
 
-1. **Glade** &mdash; download free for academic use from [peardrop.co.uk/glade](http://www.peardrop.co.uk/glade/). The Glade base library (pins, supplies) ships with the install.
-2. **The C5N PDK** &mdash; the technology file (`C5N.tch`), DRC / LPE rule decks (`C5N_DRC.py`, `C5N_EXT_LVS.py`), device pcells (`C5NNMOS.py`, `C5NPMOS.py`), and SPICE models (`engr3426.sub`). These are educational files based on the **[MOSIS SCMOS3ME_SUBM scalable design rules](https://www.mosis.com/files/scmos/scmos.pdf)** and were provided through the ENGR3426 course at PSUT. Drop them into a `tech/ENGR3426_mod/` folder next to the cell folders.
+1. **Glade**  ; download free for academic use from [peardrop.co.uk/glade](http://www.peardrop.co.uk/glade/). The Glade base library (pins, supplies) ships with the install.
+2. **The C5N PDK**  ; the technology file (`C5N.tch`), DRC / LPE rule decks (`C5N_DRC.py`, `C5N_EXT_LVS.py`), device pcells (`C5NNMOS.py`, `C5NPMOS.py`), and SPICE models (`engr3426.sub`). These are educational files based on the **[MOSIS SCMOS3ME_SUBM scalable design rules](https://www.mosis.com/files/scmos/scmos.pdf)** and were provided through the ENGR3426 course at PSUT. Drop them into a `tech/ENGR3426_mod/` folder next to the cell folders.
 
-Without the PDK, Glade can still **open** the binary cell views, and the `.cdl` netlists and `.txt` LVS reports are fully readable in any text editor &mdash; but the layout layers won't be coloured correctly and verification can't be rerun.
+Without the PDK, Glade can still **open** the binary cell views, and the `.cdl` netlists and `.txt` LVS reports are fully readable in any text editor  ; but the layout layers won't be coloured correctly and verification can't be rerun.
 
 ## Author
 
-**Leen Almousa** &mdash; [github.com/leenalmousa](https://github.com/leenalmousa)
+**Leen Almousa**  ; [github.com/leenalmousa](https://github.com/leenalmousa)
 
 ## License
 
