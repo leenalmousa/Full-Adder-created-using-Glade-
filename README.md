@@ -108,24 +108,50 @@ This repo does not include the Glade application, the C5N PDK, or any Glade-ship
 </tr>
 </table>
 
-## Verification results
+## Verification
 
-Every cell passes **LVS clean** &mdash; the extracted layout matches the schematic transistor-for-transistor.
+Every cell is run through the full **DRC → LPE → LVS** sign-off flow before being reused in a higher-level block. All three steps come back clean for every gate and for the assembled full adder.
+
+### 1. DRC &mdash; Design-Rule Check
+
+DRC scans the layout polygons against the C5N PDK's geometric rules (minimum width, spacing, enclosure, antenna, overlap, etc.). A run that finishes with **"No DRC errors were found"** means the layout is manufacturable.
+
+<p align="center">
+  <img src="figures/drc_clean_full_adder.png" alt="Glade DRC report — no errors on the full adder" width="600"/><br/>
+  <em>DRC sign-off on the full adder &mdash; "No DRC errors were found" across every layer (VIA23, M3, overglass, etc.).</em>
+</p>
+
+### 2. LPE &mdash; Layout Parameter Extraction
+
+LPE walks the layout, recognises the transistor patterns, and writes a **device-level netlist back out** with real W/L sizing and source/drain area &amp; perimeter parasitics. This extracted netlist is what LVS compares against the schematic.
+
+<p align="center">
+  <img src="figures/lpe_full_adder.png" alt="Glade LPE extraction completed for the full adder" width="600"/><br/>
+  <em>LPE completes on the full adder &mdash; MOS devices extracted and the <code>extracted</code> cellview is opened for inspection.</em>
+</p>
+
+The text netlists this produces are in each gate folder as `extracted.cdl`.
+
+### 3. LVS &mdash; Layout vs. Schematic
+
+LVS feeds the extracted netlist into the Gemini engine and compares it, device-for-device, against the schematic netlist. A clean run means the layout you drew implements exactly the circuit you intended.
 
 <p align="center">
   <img src="figures/lvs_clean_full_adder.png" alt="Gemini LVS clean report for the full adder" width="600"/><br/>
   <em>Gemini LVS engine reports a clean match on the full adder (<code>exit code 0</code>).</em>
 </p>
 
-| Cell           | Devices (after reduction) | LVS report                                |
-|----------------|---------------------------|-------------------------------------------|
-| Inverter       | 2                         | [`inverter/lvs.txt`](inverter/lvs.txt)    |
-| NAND           | 4                         | [`nand/lvs.txt`](nand/lvs.txt)            |
-| NOR            | 4                         | [`nor/lvs.txt`](nor/lvs.txt)              |
-| AND            | 6                         | [`and/lvs.txt`](and/lvs.txt)              |
-| OR             | 6                         | [`or/lvs.txt`](or/lvs.txt)                |
-| XOR            | 12                        | [`xor/lvs.txt`](xor/lvs.txt)              |
-| **Full adder** | **35** (42 before reduction) | [`full_adder/lvs.txt`](full_adder/lvs.txt) |
+### Summary
+
+| Cell           | DRC   | LPE   | LVS   | Devices (after reduction) | LVS report                                |
+|----------------|:-----:|:-----:|:-----:|---------------------------|-------------------------------------------|
+| Inverter       | clean | done  | clean | 2                         | [`inverter/lvs.txt`](inverter/lvs.txt)    |
+| NAND           | clean | done  | clean | 4                         | [`nand/lvs.txt`](nand/lvs.txt)            |
+| NOR            | clean | done  | clean | 4                         | [`nor/lvs.txt`](nor/lvs.txt)              |
+| AND            | clean | done  | clean | 6                         | [`and/lvs.txt`](and/lvs.txt)              |
+| OR             | clean | done  | clean | 6                         | [`or/lvs.txt`](or/lvs.txt)                |
+| XOR            | clean | done  | clean | 12                        | [`xor/lvs.txt`](xor/lvs.txt)              |
+| **Full adder** | clean | done  | **clean** | **35** (42 before reduction) | [`full_adder/lvs.txt`](full_adder/lvs.txt) |
 
 
 
