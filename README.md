@@ -148,11 +148,7 @@ Every cell passes **LVS clean** &mdash; the extracted layout matches the schemat
 | XOR            | 12                        | [`xor/lvs.txt`](xor/lvs.txt)              |
 | **Full adder** | **35** (42 before reduction) | [`full_adder/lvs.txt`](full_adder/lvs.txt) |
 
-The full adder's extracted netlist contains 42 raw transistors that reduce to **35** after series/parallel collapse, with **18 internal nets** matching the schematic. Body terminals are tied for all 42 transistors (21 NMOS to `gnd`, 21 PMOS to `VDD`).
 
-## Course context
-
-Built for **ENGR3426 (Digital Electronics / VLSI Design)** at PSUT. Demonstrates the full custom-layout flow on a textbook PDK: cell-library construction, hierarchical schematic/layout, DRC, LVS, and post-layout netlist extraction.
 
 ## Author
 
