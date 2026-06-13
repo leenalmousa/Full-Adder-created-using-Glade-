@@ -139,18 +139,6 @@ LVS feeds the extracted netlist into the Gemini engine and compares it, device f
   <em>Gemini LVS engine reports a clean match on the full adder (<code>exit code 0</code>).</em>
 </p>
 
-### Summary
-
-| Cell           | DRC   | LPE   | LVS   | Devices (after reduction) | LVS report                                |
-|----------------|:-----:|:-----:|:-----:|---------------------------|-------------------------------------------|
-| Inverter       | clean | done  | clean | 2                         | [`inverter/lvs.txt`](inverter/lvs.txt)    |
-| NAND           | clean | done  | clean | 4                         | [`nand/lvs.txt`](nand/lvs.txt)            |
-| NOR            | clean | done  | clean | 4                         | [`nor/lvs.txt`](nor/lvs.txt)              |
-| AND            | clean | done  | clean | 6                         | [`and/lvs.txt`](and/lvs.txt)              |
-| OR             | clean | done  | clean | 6                         | [`or/lvs.txt`](or/lvs.txt)                |
-| XOR            | clean | done  | clean | 12                        | [`xor/lvs.txt`](xor/lvs.txt)              |
-| **Full adder** | clean | done  | **clean** | **35** (42 before reduction) | [`full_adder/lvs.txt`](full_adder/lvs.txt) |
-
 
 
 ## Note  ; running this yourself
