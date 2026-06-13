@@ -1,0 +1,25 @@
+*******************************************************************************
+* CDL netlist
+*
+* Library : Training
+* Top Cell Name: inverter schem
+* View Name: schematic
+* Netlist created: 06.Aug.2024 00:26:17
+*******************************************************************************
+
+*.SCALE METER
+*.GLOBAL vdd gnd
+
+*******************************************************************************
+* Library Name: Training
+* Cell Name:    inverter schem
+* View Name:    schematic
+*******************************************************************************
+
+.SUBCKT inverter schem Vdd in out
+*.PININFO Vdd:B out:O in:I
+
+M2 out in gnd gnd C5NNMOS w=200n l=30n m=1
+M1 out in Vdd Vdd C5NPMOS w=1600n l=30n m=1
+.ENDS
+

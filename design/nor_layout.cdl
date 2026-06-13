@@ -1,0 +1,21 @@
+*******************************************************************************
+* CDL netlist
+*
+* Library : Training
+* Top Cell Name: NOR LAYOUT NEW
+* View Name: layout
+* Netlist created: 04.Aug.2024 21:42:03
+*******************************************************************************
+
+*.SCALE METER
+*.GLOBAL vdd gnd
+
+*******************************************************************************
+* Library Name: Training
+* Cell Name:    NOR LAYOUT NEW
+* View Name:    layout
+*******************************************************************************
+
+.SUBCKT NOR LAYOUT NEW
+
+.ENDS
