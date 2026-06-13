@@ -110,20 +110,20 @@ This repo does not include the Glade application, the C5N PDK, or any Glade-ship
 
 ## Verification
 
-Every cell is run through the full **DRC → LPE → LVS** sign-off flow before being reused in a higher-level block. All three steps come back clean for every gate and for the assembled full adder.
+Every cell is run through the full **DRC → LPE → LVS** sign off flow before being reused in a higher level block. All three steps come back clean for every gate and for the assembled full adder.
 
-### 1. DRC &mdash; Design-Rule Check
+### 1. DRC &mdash; Design Rule Check
 
 DRC scans the layout polygons against the C5N PDK's geometric rules (minimum width, spacing, enclosure, antenna, overlap, etc.). A run that finishes with **"No DRC errors were found"** means the layout is manufacturable.
 
 <p align="center">
   <img src="figures/drc_clean_full_adder.png" alt="Glade DRC report — no errors on the full adder" width="600"/><br/>
-  <em>DRC sign-off on the full adder &mdash; "No DRC errors were found" across every layer (VIA23, M3, overglass, etc.).</em>
+  <em>DRC sign off on the full adder &mdash; "No DRC errors were found" across every layer (VIA23, M3, overglass, etc.).</em>
 </p>
 
 ### 2. LPE &mdash; Layout Parameter Extraction
 
-LPE walks the layout, recognises the transistor patterns, and writes a **device-level netlist back out** with real W/L sizing and source/drain area &amp; perimeter parasitics. This extracted netlist is what LVS compares against the schematic.
+LPE walks the layout, recognises the transistor patterns, and writes a **device level netlist back out** with real W/L sizing and source/drain area &amp; perimeter parasitics. This extracted netlist is what LVS compares against the schematic.
 
 <p align="center">
   <img src="figures/lpe_full_adder.png" alt="Glade LPE extraction completed for the full adder" width="600"/><br/>
@@ -134,7 +134,7 @@ The text netlists this produces are in each gate folder as `extracted.cdl`.
 
 ### 3. LVS &mdash; Layout vs. Schematic
 
-LVS feeds the extracted netlist into the Gemini engine and compares it, device-for-device, against the schematic netlist. A clean run means the layout you drew implements exactly the circuit you intended.
+LVS feeds the extracted netlist into the Gemini engine and compares it, device for device, against the schematic netlist. A clean run means the layout you drew implements exactly the circuit you intended.
 
 <p align="center">
   <img src="figures/lvs_clean_full_adder.png" alt="Gemini LVS clean report for the full adder" width="600"/><br/>
@@ -157,12 +157,12 @@ LVS feeds the extracted netlist into the Gemini engine and compares it, device-f
 
 ## Note &mdash; running this yourself
 
-This repo is a **showcase of my work**, not a turn-key Glade project. To open the cells and re-run DRC / LPE / LVS yourself you also need:
+This repo is a **showcase of my work**, not a turn key Glade project. To open the cells and rerun DRC / LPE / LVS yourself you also need:
 
 1. **Glade** &mdash; download free for academic use from [peardrop.co.uk/glade](http://www.peardrop.co.uk/glade/). The Glade base library (pins, supplies) ships with the install.
 2. **The C5N PDK** &mdash; the technology file (`C5N.tch`), DRC / LPE rule decks (`C5N_DRC.py`, `C5N_EXT_LVS.py`), device pcells (`C5NNMOS.py`, `C5NPMOS.py`), and SPICE models (`engr3426.sub`). These are educational files based on the **[MOSIS SCMOS3ME_SUBM scalable design rules](https://www.mosis.com/files/scmos/scmos.pdf)** and were provided through the ENGR3426 course at PSUT. Drop them into a `tech/ENGR3426_mod/` folder next to the cell folders.
 
-Without the PDK, Glade can still **open** the binary cell views, and the `.cdl` netlists and `.txt` LVS reports are fully readable in any text editor &mdash; but the layout layers won't be coloured correctly and verification can't be re-run.
+Without the PDK, Glade can still **open** the binary cell views, and the `.cdl` netlists and `.txt` LVS reports are fully readable in any text editor &mdash; but the layout layers won't be coloured correctly and verification can't be rerun.
 
 ## Author
 
