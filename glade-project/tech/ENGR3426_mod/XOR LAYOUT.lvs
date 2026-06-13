@@ -1,0 +1,43 @@
+-----------------------------------------------------------------------------
+Gemini 2.7.4 (64 bit) Compiled at 12:52:04 on Feb  8 2019 by Visual C++ 13.2
+-----------------------------------------------------------------------------
+
+Gemini started at 13:11:07 on 06/08/2024
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : XOR LAYOUT_extracted.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       8
+  Number of nets    :       10
+  Number of ports   :       1
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : XOR CDL.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       8
+  Number of nets    :       10
+  Number of ports   :       7
+
+-----------------------------------------------------------------------------
+	Netlist summary after reduction : 
+-----------------------------------------------------------------------------
+		XOR LAYOUT_extracted.cdl	      XOR CDL.cdl
+  Number of devices :       6			6
+  Number of nets    :       8			8
+  Number of ports   :       1			7
+
+
+These circuits contain some symmetry (57% nodes not yet matched).
+Gemini will attempt to find a valid match for symmetrical nodes.
+####A total of 2 transistor chains were out of order.
+
+There were no device property errors.
+4 (28%) matches were found by local matching.
+All nodes were matched in 9 passes.
+
+The netlists match.
+
+0 devices and 0 nets written to C:\Users\leena\OneDrive\Desktop\glade\tech\ENGR3426_mod\XOR LAYOUT.err
+
+Gemini completed at 13:11:07 on 06/08/2024
+

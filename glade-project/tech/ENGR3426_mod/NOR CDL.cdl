@@ -1,0 +1,27 @@
+*******************************************************************************
+* CDL netlist
+*
+* Library : Training
+* Top Cell Name: NOR SCHEM 
+* View Name: schematic
+* Netlist created: 04.Aug.2024 21:41:44
+*******************************************************************************
+
+*.SCALE METER
+*.GLOBAL vdd gnd
+
+*******************************************************************************
+* Library Name: Training
+* Cell Name:    NOR SCHEM 
+* View Name:    schematic
+*******************************************************************************
+
+.SUBCKT NOR SCHEM  in1 in2 Vdd out
+*.PININFO in1:I in2:I Vdd:B out:O
+
+M7 out in1 gnd gnd C5NNMOS w=200n l=30n m=1
+M6_14 out in2 gnd gnd C5NNMOS w=200n l=30n m=1
+M5 out in2 n0 Vdd C5NPMOS w=1600 l=30n m=1
+M4_10 n0 in1 Vdd n1 C5NPMOS w=1600 l=30n m=1
+.ENDS
+

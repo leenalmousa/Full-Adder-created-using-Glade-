@@ -1,0 +1,31 @@
+# Glade application + runtime (never commit the tool itself)
+glade.exe
+gemini.exe
+fastcap.exe
+Python27/
+lib/
+platforms/
+imageformats/
+printsupport/
+html/
+Glade_Reference.pdf
+*.dll
+*.pyc
+
+# Glade session noise
+glade_*.log
+gladerc.xml*
+glade.qss
+.glade.py
+
+# Glade scratch / temp
+temp/
+verifications/drc/*.txt
+verifications/lvs/*.txt
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*~

@@ -1,0 +1,38 @@
+-----------------------------------------------------------------------------
+Gemini 2.7.4 (64 bit) Compiled at 12:52:04 on Feb  8 2019 by Visual C++ 13.2
+-----------------------------------------------------------------------------
+
+Gemini started at 10:11:54 on 06/08/2024
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : inverter layout _extracted.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       2
+  Number of nets    :       4
+  Number of ports   :       1
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : inv.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       2
+  Number of nets    :       4
+  Number of ports   :       4
+
+-----------------------------------------------------------------------------
+	Netlist summary after reduction : 
+-----------------------------------------------------------------------------
+		inverter layout _extracted.cdl	          inv.cdl
+  Number of devices :       2			2
+  Number of nets    :       4			4
+  Number of ports   :       1			4
+
+There were no device property errors.
+2 (33%) matches were found by local matching.
+All nodes were matched in 2 passes.
+
+The netlists match.
+
+0 devices and 0 nets written to C:\Users\leena\OneDrive\Desktop\glade\tech\ENGR3426_mod\inverter layout .err
+
+Gemini completed at 10:11:54 on 06/08/2024
+

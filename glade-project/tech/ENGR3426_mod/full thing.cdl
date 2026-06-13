@@ -1,0 +1,65 @@
+*******************************************************************************
+* CDL netlist
+*
+* Library : Training
+* Top Cell Name: fulladder
+* View Name: schematic
+* Netlist created: 06.Aug.2024 13:16:23
+*******************************************************************************
+
+*.SCALE METER
+*.GLOBAL vdd gnd
+
+*******************************************************************************
+* Library Name: Training
+* Cell Name:    fulladder
+* View Name:    schematic
+*******************************************************************************
+
+.SUBCKT fulladder S B A Cin Vdd carry
+*.PININFO carry:O S:I B:I A:I Cin:I Vdd:B
+
+M38 n31 A Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M37 n12 n20 n3 Vdd C5NPMOS w=1600n l=30n m=1
+M29 n22 Cin Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M2 n27 n10 Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M20 n12 A n26 gnd C5NNMOS w=200n l=30n m=1
+M24 n24 n12 Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M26 n11 B Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M39 n31 A gnd gnd C5NNMOS w=200n l=30n m=1
+M27 n11 B n28 gnd C5NNMOS w=200n l=30n m=1
+M22 n9 Cin gnd gnd C5NNMOS w=200n l=30n m=1
+M14 n25 n12 gnd gnd C5NNMOS w=200n l=30n m=1
+M0 n20 B gnd gnd C5NNMOS w=200n l=30n m=1
+M4 n16 n18 gnd gnd C5NNMOS w=200n l=30n m=1
+M12 n14 Cin gnd gnd C5NNMOS w=200n l=30n m=1
+M18 n26 n31 gnd gnd C5NNMOS w=200n l=30n m=1
+M6 n18 n22 gnd gnd C5NNMOS w=200n l=30n m=1
+M41 n25 n12 Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M17 n12 n20 n26 gnd C5NNMOS w=200n l=30n m=1
+M23 n9 n25 gnd gnd C5NNMOS w=200n l=30n m=1
+M28 n22 n12 n21 gnd C5NNMOS w=200n l=30n m=1
+M19 n26 B gnd gnd C5NNMOS w=200n l=30n m=1
+M16 S n12 n9 gnd C5NNMOS w=200n l=30n m=1
+M11 S Cin n23 Vdd C5NPMOS w=1600n l=30n m=1
+M9 n10 n11 gnd gnd C5NNMOS w=200n l=30n m=1
+M40 n20 B Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M34 n3 A Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M15 n23 n25 Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M36 n30 n31 Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M25 n10 n11 Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M30 n22 n12 Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M35 n12 B n30 Vdd C5NPMOS w=1600n l=30n m=1
+M5 carry n16 Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M21 S n14 n24 Vdd C5NPMOS w=1600n l=30n m=1
+M3 carry n16 gnd gnd C5NNMOS w=200n l=30n m=1
+M8 n28 A gnd gnd C5NNMOS w=200n l=30n m=1
+M7 n21 Cin gnd gnd C5NNMOS w=200n l=30n m=1
+M32 n16 n10 gnd gnd C5NNMOS w=200n l=30n m=1
+M31 n18 n22 Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M13 n14 Cin Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M1 n11 A Vdd Vdd C5NPMOS w=1600n l=30n m=1
+M10 S n14 n9 gnd C5NNMOS w=200n l=30n m=1
+M33 n16 n18 n27 Vdd C5NPMOS w=1600n l=30n m=1
+.ENDS
+
