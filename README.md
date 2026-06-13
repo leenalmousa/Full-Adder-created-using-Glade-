@@ -1,8 +1,8 @@
-# Full Adder &mdash; CMOS Layout in Glade
+# Full Adder ; CMOS Layout in Glade
 
 A one-bit **CMOS full adder** designed at the **transistor and layout level** in [Glade](http://www.peardrop.co.uk/glade/) on the **C5N 0.5 µm PDK**. Built bottom-up from a hand-laid library of CMOS gates (INV → NAND/NOR → AND/OR/XOR → full adder), each verified with **DRC** (design-rule check) and **LVS** (layout-vs-schematic) before being composed into the next.
 
-This repo contains **only my work** &mdash; the cells I drew, the netlists I exported, and the LVS reports I generated. It does not include the Glade application, the C5N PDK, or any Glade-shipped library.
+This repo does not include the Glade application, the C5N PDK, or any Glade-shipped library.
 
 [![Tool](https://img.shields.io/badge/Layout-Glade-1E6FBA)](http://www.peardrop.co.uk/glade/)
 [![PDK](https://img.shields.io/badge/PDK-C5N%200.5%CE%BCm-525252)](#)
@@ -16,7 +16,6 @@ This repo contains **only my work** &mdash; the cells I drew, the netlists I exp
 
 ## What's in here
 
-One folder per cell I built. Same file naming inside each folder.
 
 ```
 .
