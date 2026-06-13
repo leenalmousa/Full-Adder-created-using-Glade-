@@ -155,6 +155,15 @@ LVS feeds the extracted netlist into the Gemini engine and compares it, device-f
 
 
 
+## Note &mdash; running this yourself
+
+This repo is a **showcase of my work**, not a turn-key Glade project. To open the cells and re-run DRC / LPE / LVS yourself you also need:
+
+1. **Glade** &mdash; download free for academic use from [peardrop.co.uk/glade](http://www.peardrop.co.uk/glade/). The Glade base library (pins, supplies) ships with the install.
+2. **The C5N PDK** &mdash; the technology file (`C5N.tch`), DRC / LPE rule decks (`C5N_DRC.py`, `C5N_EXT_LVS.py`), device pcells (`C5NNMOS.py`, `C5NPMOS.py`), and SPICE models (`engr3426.sub`). These are educational files based on the **[MOSIS SCMOS3ME_SUBM scalable design rules](https://www.mosis.com/files/scmos/scmos.pdf)** and were provided through the ENGR3426 course at PSUT. Drop them into a `tech/ENGR3426_mod/` folder next to the cell folders.
+
+Without the PDK, Glade can still **open** the binary cell views, and the `.cdl` netlists and `.txt` LVS reports are fully readable in any text editor &mdash; but the layout layers won't be coloured correctly and verification can't be re-run.
+
 ## Author
 
 **Leen Almousa** &mdash; [github.com/leenalmousa](https://github.com/leenalmousa)
