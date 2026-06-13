@@ -1,0 +1,92 @@
+-----------------------------------------------------------------------------
+Gemini 2.7.4 (64 bit) Compiled at 12:52:04 on Feb  8 2019 by Visual C++ 13.2
+-----------------------------------------------------------------------------
+
+Gemini started at 10:01:51 on 06/08/2024
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : gradually_extracted.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       4
+  Number of nets    :       13
+  Number of ports   :       1
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : gradually.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       4
+  Number of nets    :       6
+  Number of ports   :       5
+
+-----------------------------------------------------------------------------
+	Netlist summary after reduction : 
+-----------------------------------------------------------------------------
+		gradually_extracted.cdl	    gradually.cdl
+  Number of devices :       4			4
+  Number of nets    :       13			6
+  Number of ports   :       1			5
+
+
+The circuits are different.
+
+These circuits contain some symmetry (100% nodes not yet matched).
+Gemini will attempt to find a valid match for symmetrical nodes.
+##There were no device property errors.
+4 (23%) matches were found by local matching.
+
+The following netlist mismatches occurred:
+
+-----------------------------------------------------------------------------
+	Netlist errors : gradually_extracted.cdl 
+-----------------------------------------------------------------------------
+3 NETS do not match:
+NET "n2" 1 connections
+  P: (inst M3) [g] n16 :: [s,d,sub] n9, n10, n2
+NET "n0" 1 connections
+  P: (inst M2) [g] n12 :: [s,d,sub] n7, n8, n0
+NET "n1" 2 connections
+  N: (inst M1) [g] n16 :: [s,d,sub] n5, n6, n1
+  N: (inst M0) [g] n12 :: [s,d,sub] n3, n4, n1
+8 NETS could not be matched, possibly because of other unmatched nets:
+NET "n8" 1 connections
+  P: (inst M2) [g] n12 :: [s,d,sub] n7, n8, n0
+NET "n7" 1 connections
+  P: (inst M2) [g] n12 :: [s,d,sub] n7, n8, n0
+NET "n4" 1 connections
+  N: (inst M0) [g] n12 :: [s,d,sub] n3, n4, n1
+NET "n3" 1 connections
+  N: (inst M0) [g] n12 :: [s,d,sub] n3, n4, n1
+NET "n5" 1 connections
+  N: (inst M1) [g] n16 :: [s,d,sub] n5, n6, n1
+NET "n6" 1 connections
+  N: (inst M1) [g] n16 :: [s,d,sub] n5, n6, n1
+NET "n9" 1 connections
+  P: (inst M3) [g] n16 :: [s,d,sub] n9, n10, n2
+NET "n10" 1 connections
+  P: (inst M3) [g] n16 :: [s,d,sub] n9, n10, n2
+
+-----------------------------------------------------------------------------
+	Netlist errors : gradually.cdl 
+-----------------------------------------------------------------------------
+4 NETS do not match:
+NET "out" 2 connections
+  P: (inst M2) [g] A :: [s,d,sub] out, Vdd, Vdd
+  N: (inst M3) [g] A :: [s,d,sub] out, gnd, gnd
+NET "out1" 2 connections
+  P: (inst M0) [g] B :: [s,d,sub] out1, Vdd, Vdd
+  N: (inst M1) [g] B :: [s,d,sub] out1, gnd, gnd
+NET "gnd" 4 connections
+  N: (inst M1) [g] B :: [s,d,sub] out1, gnd, gnd
+  N: (inst M3) [g] A :: [s,d,sub] out, gnd, gnd
+  N: (inst M3) [g] A :: [s,d,sub] out, gnd, gnd
+  N: (inst M1) [g] B :: [s,d,sub] out1, gnd, gnd
+NET "Vdd" 4 connections
+  P: (inst M0) [g] B :: [s,d,sub] out1, Vdd, Vdd
+  P: (inst M2) [g] A :: [s,d,sub] out, Vdd, Vdd
+  P: (inst M2) [g] A :: [s,d,sub] out, Vdd, Vdd
+  P: (inst M0) [g] B :: [s,d,sub] out1, Vdd, Vdd
+
+0 devices and 11 nets written to C:\Users\leena\OneDrive\Desktop\glade\tech\ENGR3426_mod\gradually.err
+
+Gemini completed at 10:01:51 on 06/08/2024
+

@@ -1,0 +1,179 @@
+-----------------------------------------------------------------------------
+Gemini 2.7.4 (64 bit) Compiled at 12:52:04 on Feb  8 2019 by Visual C++ 13.2
+-----------------------------------------------------------------------------
+
+Gemini started at 10:02:54 on 06/08/2024
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : xor new _extracted.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       12
+  Number of nets    :       28
+  Number of ports   :       2
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : gradually.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       12
+  Number of nets    :       10
+  Number of ports   :       5
+
+-----------------------------------------------------------------------------
+	Netlist summary after reduction : 
+-----------------------------------------------------------------------------
+		xor new _extracted.cdl	    gradually.cdl
+  Number of devices :       6			10
+  Number of nets    :       22			8
+  Number of ports   :       2			5
+
+
+The circuits are different.
+
+These circuits contain some symmetry (100% nodes not yet matched).
+Gemini will attempt to find a valid match for symmetrical nodes.
+##There were no device property errors.
+0 (0%) matches were found by local matching.
+
+The following netlist mismatches occurred:
+
+-----------------------------------------------------------------------------
+	Netlist errors : xor new _extracted.cdl 
+-----------------------------------------------------------------------------
+6 NETS do not match:
+NET "n4" 4 connections
+  P: (inst M14) [g] n32, n33, n34, n35 :: [s,d,sub] n18, n22, n4
+  P: (inst M15) [g] n35 :: [s,d,sub] n15, n22, n4
+  P: (inst M13) [g] n32, n33 :: [s,d,sub] n18, n17, n4
+  P: (inst M12) [g] n32 :: [s,d,sub] n18, n1, n4
+NET "n1" 1 connections
+  P: (inst M11) [g] n26 :: [s,d,sub] n15, n17, n1
+NET "n3" 1 connections
+  P: (inst M10) [g] n25 :: [s,d,sub] n14, n16, n3
+NET "n26" 2 connections
+  N: (inst M5) [g] n26 :: [s,d,sub] n6, n8, n2
+  P: (inst M11) [g] n26 :: [s,d,sub] n15, n17, n1
+NET "n25" 2 connections
+  N: (inst M4) [g] n25 :: [s,d,sub] n5, n7, n2
+  P: (inst M10) [g] n25 :: [s,d,sub] n14, n16, n3
+NET "n2" 6 connections
+  N: (inst M5) [g] n26 :: [s,d,sub] n6, n8, n2
+  N: (inst M7) [g] n32, n33 :: [s,d,sub] n9, n14, n2
+  N: (inst M4) [g] n25 :: [s,d,sub] n5, n7, n2
+  N: (inst M9) [g] n35 :: [s,d,sub] n16, n13, n2
+  N: (inst M6) [g] n32 :: [s,d,sub] n9, n3, n2
+  N: (inst M8) [g] n32, n33, n34, n35 :: [s,d,sub] n9, n13, n2
+16 NETS could not be matched, possibly because of other unmatched nets:
+NET "n13" 1 connections
+  N: (inst M9) [g] n35 :: [s,d,sub] n16, n13, n2
+NET "n9" 1 connections
+  N: (inst M6) [g] n32 :: [s,d,sub] n9, n3, n2
+NET "n18" 1 connections
+  P: (inst M12) [g] n32 :: [s,d,sub] n18, n1, n4
+NET "n22" 1 connections
+  P: (inst M15) [g] n35 :: [s,d,sub] n15, n22, n4
+NET "n5" 1 connections
+  N: (inst M4) [g] n25 :: [s,d,sub] n5, n7, n2
+NET "n7" 1 connections
+  N: (inst M4) [g] n25 :: [s,d,sub] n5, n7, n2
+NET "n6" 1 connections
+  N: (inst M5) [g] n26 :: [s,d,sub] n6, n8, n2
+NET "n8" 1 connections
+  N: (inst M5) [g] n26 :: [s,d,sub] n6, n8, n2
+NET "n15" 1 connections
+  P: (inst M11) [g] n26 :: [s,d,sub] n15, n17, n1
+NET "n17" 1 connections
+  P: (inst M11) [g] n26 :: [s,d,sub] n15, n17, n1
+NET "n35" 2 connections
+  N: (inst M8) [g] n32, n33, n34, n35 :: [s,d,sub] n9, n13, n2
+  P: (inst M14) [g] n32, n33, n34, n35 :: [s,d,sub] n18, n22, n4
+NET "n33" 2 connections
+  N: (inst M8) [g] n32, n33, n34, n35 :: [s,d,sub] n9, n13, n2
+  P: (inst M14) [g] n32, n33, n34, n35 :: [s,d,sub] n18, n22, n4
+NET "n34" 2 connections
+  N: (inst M8) [g] n32, n33, n34, n35 :: [s,d,sub] n9, n13, n2
+  P: (inst M14) [g] n32, n33, n34, n35 :: [s,d,sub] n18, n22, n4
+NET "n32" 2 connections
+  N: (inst M8) [g] n32, n33, n34, n35 :: [s,d,sub] n9, n13, n2
+  P: (inst M14) [g] n32, n33, n34, n35 :: [s,d,sub] n18, n22, n4
+NET "n16" 1 connections
+  P: (inst M10) [g] n25 :: [s,d,sub] n14, n16, n3
+NET "n14" 1 connections
+  P: (inst M10) [g] n25 :: [s,d,sub] n14, n16, n3
+
+2 DEVICES do not match:
+DEVICE P: (inst M14) [g] n32, n33, n34, n35 :: [s,d,sub] n18, n22, n4
+DEVICE N: (inst M8) [g] n32, n33, n34, n35 :: [s,d,sub] n9, n13, n2
+2 DEVICES could not be matched, possibly because of other unmatched devices:
+DEVICE N: (inst M4) [g] n25 :: [s,d,sub] n5, n7, n2
+DEVICE N: (inst M5) [g] n26 :: [s,d,sub] n6, n8, n2
+
+-----------------------------------------------------------------------------
+	Netlist errors : gradually.cdl 
+-----------------------------------------------------------------------------
+8 NETS do not match:
+NET "n7" 4 connections
+  N: (inst M9) [g] A :: [s,d,sub] out, n7, gnd
+  N: (inst M17) [g] n6 :: [s,d,sub] n7, gnd, gnd
+  N: (inst M18) [g] n8 :: [s,d,sub] out, n7, gnd
+  N: (inst M10) [g] B :: [s,d,sub] n7, gnd, gnd
+NET "Vdd" 10 connections
+  P: (inst M13) [g] A :: [s,d,sub] n6, Vdd, Vdd
+  P: (inst M11) [g] B, n6 :: [s,d,sub] out, Vdd, Vdd
+  P: (inst M15) [g] B :: [s,d,sub] n8, Vdd, Vdd
+  P: (inst M19) [g] n8, A :: [s,d,sub] out, Vdd, Vdd
+  P: (inst M16) [g] B :: [s,d,sub] out, Vdd, Vdd
+  P: (inst M11) [g] B, n6 :: [s,d,sub] out, Vdd, Vdd
+  P: (inst M15) [g] B :: [s,d,sub] n8, Vdd, Vdd
+  P: (inst M8) [g] n8 :: [s,d,sub] out, Vdd, Vdd
+  P: (inst M19) [g] n8, A :: [s,d,sub] out, Vdd, Vdd
+  P: (inst M13) [g] A :: [s,d,sub] n6, Vdd, Vdd
+NET "n8" 4 connections
+  N: (inst M18) [g] n8 :: [s,d,sub] out, n7, gnd
+  P: (inst M19) [g] n8, A :: [s,d,sub] out, Vdd, Vdd
+  N: (inst M14) [g] B :: [s,d,sub] n8, gnd, gnd
+  P: (inst M15) [g] B :: [s,d,sub] n8, Vdd, Vdd
+NET "n6" 4 connections
+  P: (inst M11) [g] B, n6 :: [s,d,sub] out, Vdd, Vdd
+  N: (inst M17) [g] n6 :: [s,d,sub] n7, gnd, gnd
+  N: (inst M12) [g] A :: [s,d,sub] n6, gnd, gnd
+  P: (inst M13) [g] A :: [s,d,sub] n6, Vdd, Vdd
+NET "B" 4 connections
+  P: (inst M15) [g] B :: [s,d,sub] n8, Vdd, Vdd
+  P: (inst M11) [g] B, n6 :: [s,d,sub] out, Vdd, Vdd
+  N: (inst M14) [g] B :: [s,d,sub] n8, gnd, gnd
+  N: (inst M10) [g] B :: [s,d,sub] n7, gnd, gnd
+NET "A" 4 connections
+  N: (inst M9) [g] A :: [s,d,sub] out, n7, gnd
+  P: (inst M19) [g] n8, A :: [s,d,sub] out, Vdd, Vdd
+  N: (inst M12) [g] A :: [s,d,sub] n6, gnd, gnd
+  P: (inst M13) [g] A :: [s,d,sub] n6, Vdd, Vdd
+NET "out" 4 connections
+  P: (inst M11) [g] B, n6 :: [s,d,sub] out, Vdd, Vdd
+  N: (inst M9) [g] A :: [s,d,sub] out, n7, gnd
+  N: (inst M18) [g] n8 :: [s,d,sub] out, n7, gnd
+  P: (inst M19) [g] n8, A :: [s,d,sub] out, Vdd, Vdd
+NET "gnd" 10 connections
+  N: (inst M10) [g] B :: [s,d,sub] n7, gnd, gnd
+  N: (inst M12) [g] A :: [s,d,sub] n6, gnd, gnd
+  N: (inst M17) [g] n6 :: [s,d,sub] n7, gnd, gnd
+  N: (inst M14) [g] B :: [s,d,sub] n8, gnd, gnd
+  N: (inst M18) [g] n8 :: [s,d,sub] out, n7, gnd
+  N: (inst M12) [g] A :: [s,d,sub] n6, gnd, gnd
+  N: (inst M17) [g] n6 :: [s,d,sub] n7, gnd, gnd
+  N: (inst M9) [g] A :: [s,d,sub] out, n7, gnd
+  N: (inst M14) [g] B :: [s,d,sub] n8, gnd, gnd
+  N: (inst M10) [g] B :: [s,d,sub] n7, gnd, gnd
+8 DEVICES could not be matched, possibly because of other unmatched devices:
+DEVICE N: (inst M12) [g] A :: [s,d,sub] n6, gnd, gnd
+DEVICE N: (inst M18) [g] n8 :: [s,d,sub] out, n7, gnd
+DEVICE N: (inst M17) [g] n6 :: [s,d,sub] n7, gnd, gnd
+DEVICE N: (inst M9) [g] A :: [s,d,sub] out, n7, gnd
+DEVICE N: (inst M10) [g] B :: [s,d,sub] n7, gnd, gnd
+DEVICE N: (inst M14) [g] B :: [s,d,sub] n8, gnd, gnd
+DEVICE P: (inst M19) [g] n8, A :: [s,d,sub] out, Vdd, Vdd
+DEVICE P: (inst M11) [g] B, n6 :: [s,d,sub] out, Vdd, Vdd
+
+4 devices and 22 nets written to C:\Users\leena\OneDrive\Desktop\glade\tech\ENGR3426_mod\xor new .err
+
+Gemini completed at 10:02:54 on 06/08/2024
+
