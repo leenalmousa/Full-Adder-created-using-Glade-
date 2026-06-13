@@ -1,0 +1,49 @@
+-----------------------------------------------------------------------------
+Gemini 2.7.4 (64 bit) Compiled at 12:52:04 on Feb  8 2019 by Visual C++ 13.2
+-----------------------------------------------------------------------------
+
+Gemini started at 08:10:56 on 13/04/2020
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : inv_extracted.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       2
+  Number of nets    :       4
+  Number of ports   :       2
+
+-----------------------------------------------------------------------------
+	Netlist summary before reduction : inv.cdl
+-----------------------------------------------------------------------------
+  Number of devices :       3
+  Number of nets    :       4
+  Number of ports   :       2
+
+-----------------------------------------------------------------------------
+	Netlist summary after reduction : 
+-----------------------------------------------------------------------------
+		inv_extracted.cdl	          inv.cdl
+  Number of devices :       2			2
+  Number of nets    :       4			4
+  Number of ports   :       2			2
+
+
+The following transistors have property mismatches:
+
+                     inv_extracted.cdl                          inv.cdl
+(1) Device type:                 N                                N
+    Inst name  :                M0                              MN1
+    Model      :           C5NNMOS                          C5NNMOS
+    S:                         gnd                              gnd
+    D:                           y                                y
+    G:                          n5                                a
+    W/L:   (um)        0.170/0.030                      0.400/0.030
+1 device property error.
+2 (33%) matches were found by local matching.
+All nodes were matched in 2 passes.
+
+The netlists match.
+
+1 devices and 0 nets written to C:\Users\Hazem\Downloads\glade-20200331T143014Z-001\glade\tech\ENGR3426\inv.err
+
+Gemini completed at 08:10:56 on 13/04/2020
+

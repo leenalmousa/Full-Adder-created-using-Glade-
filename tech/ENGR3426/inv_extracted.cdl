@@ -1,0 +1,24 @@
+*******************************************************************************
+* CDL netlist
+*
+* Library : Training
+* Top Cell Name: inv
+* View Name: extracted
+* Netlist created: 13.Apr.2020 08:10:56
+*******************************************************************************
+
+*.SCALE METER
+*.GLOBAL vdd gnd
+
+*******************************************************************************
+* Library Name: Training
+* Cell Name:    inv
+* View Name:    extracted
+*******************************************************************************
+
+.SUBCKT inv y a
+*.PININFO y:B a:I
+
+M1 vdd n5 y vdd C5NPMOS w=3e-7 l=3e-8 as=2.55e-14 ps=7.7e-7 ad=2.55e-14 pd=7.7e-7
+M0 gnd n5 y gnd C5NNMOS w=1.7e-7 l=3e-8 as=1.36e-14 ps=5e-7 ad=1.36e-14 pd=5e-7
+.ENDS
