@@ -25,7 +25,8 @@ One folder per gate I built, each containing the same set of files:
 ├── and/                       # 2-input AND   (= NAND + INV)
 ├── or/                        # 2-input OR    (= NOR  + INV)
 ├── xor/                       # 2-input XOR
-└── full_adder/                # 1-bit full adder built from the above
+├── full_adder/                # 1-bit full adder built from the above
+└── latch/                     # SR latch (Glade cell views only — no netlist)
 ```
 
 Each gate folder contains:
@@ -37,7 +38,9 @@ Each gate folder contains:
 | `extracted.cdl`   | Netlist back-extracted from the layout (real transistor sizes, source/drain area & perimeter). |
 | `lvs.txt`         | LVS (Layout vs. Schematic) report &mdash; clean means the layout matches the schematic. |
 
-All files are plain text. Open in any editor or directly on GitHub.
+All files in the gate folders are plain text. Open in any editor or directly on GitHub.
+
+The **`latch/`** folder is different &mdash; it contains four **Glade binary cell-view files** (`schematic`, `symbol`, `layout`, `extracted`) with no extensions. These can only be opened in Glade, not viewed on GitHub.
 
 ## Approach
 
