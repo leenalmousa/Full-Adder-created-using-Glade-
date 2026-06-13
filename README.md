@@ -2,210 +2,154 @@
 
 A one-bit **CMOS full adder** designed at the **transistor and layout level** in [Glade](http://www.peardrop.co.uk/glade/) on the **C5N 0.5 µm PDK**. Built bottom-up from a hand-laid library of CMOS gates (INV → NAND/NOR → AND/OR/XOR → full adder), each verified with **DRC** (design-rule check) and **LVS** (layout-vs-schematic) before being composed into the next.
 
-This repo is the **complete Glade workspace** &mdash; everything a fresh Glade installation needs to open and rerun the project. The Glade application itself is not included (you install it separately; it's free for academic use).
+This repo contains **only my work** &mdash; the cells I drew, the netlists I exported, and the LVS reports I generated. It does not include the Glade application, the C5N PDK, or any Glade-shipped library.
 
 [![Tool](https://img.shields.io/badge/Layout-Glade-1E6FBA)](http://www.peardrop.co.uk/glade/)
 [![PDK](https://img.shields.io/badge/PDK-C5N%200.5%CE%BCm-525252)](#)
-[![Verification](https://img.shields.io/badge/LVS-Clean-2E8B57)](#verification)
+[![Verification](https://img.shields.io/badge/LVS-Clean-2E8B57)](#verification-results)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
----
+<p align="center">
+  <img src="figures/full_adder_layout.png" alt="Full adder layout in Glade" width="700"/><br/>
+  <em>Final layout of the 1-bit CMOS full adder (C5N 0.5 µm, hand-laid in Glade).</em>
+</p>
 
-## Table of contents
+## What's in here
 
-- [Repo layout](#repo-layout)
-- [Quick start &mdash; running this on a fresh Glade install](#quick-start)
-- [The cell library](#the-cell-library)
-- [The PDK (`tech/`)](#the-pdk)
-- [Design approach](#design-approach)
-- [Verification](#verification)
-- [License](#license)
-
-## Repo layout
+One folder per cell I built. Same file naming inside each folder.
 
 ```
 .
-├── README.md
-├── LICENSE
-├── final report.docx        # written report (methodology, figures, results)
+├── final report.docx          # written report
+├── figures/                   # schematics, layouts, and LVS screenshots from the report
 │
-├── basic/                   # Glade base library (pins + supplies)
-│   ├── glade.lib            # library index
-│   ├── ipin/   opin/   iopin/
-│   ├── vdd/    vss/    vcc/    gnd/
+├── inverter/                  # CMOS inverter (foundational cell)
+├── nand/                      # 2-input NAND
+├── nor/                       # 2-input NOR
+├── and/                       # 2-input AND   ( NAND + INV )
+├── or/                        # 2-input OR    ( NOR  + INV )
+├── xor/                       # 2-input XOR
+├── full_adder/                # 1-bit full adder built from the gates above
 │
-├── lib/                     # YOUR cell libraries
-│   ├── default/             # an empty default workspace lib
-│   ├── devices/             # generic NMOS / PMOS symbols
-│   └── Training/            # ← all your work lives here
-│       ├── glade.lib        # library index
-│       ├── inverter schem/  inverter layout/
-│       ├── NAND SCH/        NAND LAYOUT/
-│       ├── NOR SCHEM/       nor/                # (nor has full views)
-│       ├── AND SCHEM/       and sch/      AND layout/
-│       ├── OR SCHEM/        OR LAYOUT/
-│       ├── XOR SCHEM/       XOR LAYOUT/
-│       ├── fulladder/       full adder/         # schematic + layout
-│       ├── latch/                               # SR latch cell
-│       ├── tap new in case/                     # standalone substrate-tap cell
-│       ├── C5NNMOS/   C5NPMOS/                  # custom transistor cells
-│       ├── grid/                                # alignment grid
-│       └── ...                                  # plus Glade auto-saved revisions
-│
-├── tech/                    # PDKs (technology kits)
-│   ├── ENGR3426/            # course-original C5N PDK
-│   ├── ENGR3426_mod/        # ← main PDK (used for the full adder)
-│   ├── ENGR3426_mod1/       # alternative PDK variant
-│   └── FreePDK15/           # FreePDK 15 nm (additional exploration)
-│
-├── temp/                    # Glade scratch cells (inv, latch — earlier iterations)
-│
-└── verifications/           # output directories for DRC and LVS runs
-    ├── drc/
-    └── lvs/
+├── tap/                       # standalone well/substrate tap cell
+└── latch/                     # SR latch
 ```
 
-> Each Glade cell folder (e.g. `lib/Training/inverter layout/`) contains binary view files named **`schematic`**, **`symbol`**, **`layout`**, and **`extracted`** &mdash; these are not text and only Glade can open them.
+### Inside each gate folder
 
-## Quick start
+| File                       | What it is |
+|----------------------------|------------|
+| `schematic.cdl`            | SPICE-like netlist of the schematic view (text — open anywhere). |
+| `layout.cdl`                | Netlist generated from the layout view (text). |
+| `extracted.cdl`             | Netlist back-extracted from the layout, with real transistor sizes (text). |
+| `lvs.txt`                   | LVS (Layout vs. Schematic) report &mdash; *clean* means the layout matches the schematic transistor-for-transistor. |
+| `glade_cellview/schematic`  | Glade binary cell view &mdash; the schematic geometry. Only openable in Glade. |
+| `glade_cellview/layout`     | Glade binary cell view &mdash; the layout polygon data. Only openable in Glade. |
+| `glade_cellview/extracted`  | Glade binary cell view &mdash; the back-extracted layout. Only openable in Glade. |
 
-You will need Glade installed. This repo provides everything else.
+> The `.cdl` and `.txt` files are plain text. The files inside `glade_cellview/` are Glade binary blobs (no file extension) that carry the polygon-level geometry &mdash; only Glade can open them.
 
-### 1. Install Glade
+**Cells with a different shape:**
+- `latch/` has only `glade_cellview/{schematic, layout, extracted}` &mdash; no netlist export.
+- `tap/` has only `glade_cellview/layout` &mdash; a standalone well/substrate tap cell, no schematic counterpart.
 
-Download from [peardrop.co.uk/glade](http://www.peardrop.co.uk/glade/). Free for academic use. Install for your OS (Windows, Linux, or macOS).
+## Approach
 
-### 2. Clone this repo
+The full adder is built bottom-up from CMOS primitives:
 
-```bash
-git clone https://github.com/leenalmousa/Full-Adder-created-using-Glade-.git
-cd Full-Adder-created-using-Glade-
+<p align="center">
+  <img src="figures/full_adder_block_diagram.jpg" alt="Full adder block-level structure" width="450"/><br/>
+  <em>Standard one-bit full adder: 2 XOR + 2 AND + 1 OR producing <code>SUM</code> and <code>CARRY</code>.</em>
+</p>
+
+```
+sum  = a XOR b XOR c_in
+cout = (a AND b) OR (c_in AND (a XOR b))
 ```
 
-The repo root is your **Glade workspace** &mdash; do not move it; Glade resolves relative paths from here.
+Each CMOS gate is laid out at the polygon level. The library is built bottom-up: NAND/NOR from inverters and series/parallel transistors, then AND = NAND + INV, OR = NOR + INV, and XOR. Below is the stick diagram used to plan the AND gate &mdash; a NAND followed by an inverter:
 
-### 3. Launch Glade with this workspace
+<p align="center">
+  <img src="figures/stick_diagram_and.png" alt="Stick diagram of the AND gate (NAND + INV)" width="450"/><br/>
+  <em>Stick-diagram planning of the AND gate: a NAND with the inputs and gnd/Vdd rails, followed by an inverter.</em>
+</p>
 
-Open a terminal in the repo root and launch Glade from there:
+**Substrate / well taps** are placed inside every cell so every transistor's body terminal is tied (NMOS body → gnd, PMOS body → VDD). A standalone `tap` cell is also provided in [`tap/`](tap/) to drop extra ties wherever a larger design needs them.
 
-```bash
-# Windows
-"C:\Path\to\Glade\glade.exe"
+## Gates in detail
 
-# Linux / macOS
-/path/to/glade
-```
+### AND gate
 
-Glade uses the **current working directory** as the project root, so it will pick up `basic/glade.lib`, all libraries in `lib/`, and the technology kits in `tech/`.
+<table>
+<tr>
+<td width="50%" valign="top"><img src="figures/and_schematic.png" alt="AND schematic"/></td>
+<td width="50%" valign="top"><img src="figures/and_layout.png" alt="AND layout"/></td>
+</tr>
+<tr>
+<td align="center"><em>AND schematic</em></td>
+<td align="center"><em>AND transistor-level layout (C5N 0.5 µm)</em></td>
+</tr>
+</table>
 
-### 4. Load the C5N technology
+### OR gate
 
-In Glade: **Technology → Load Technology File** → select `tech/ENGR3426_mod/C5N.tch`.
+<table>
+<tr>
+<td width="50%" valign="top"><img src="figures/or_schematic.png" alt="OR schematic"/></td>
+<td width="50%" valign="top"><img src="figures/or_layout.png" alt="OR layout"/></td>
+</tr>
+<tr>
+<td align="center"><em>OR schematic</em></td>
+<td align="center"><em>OR transistor-level layout</em></td>
+</tr>
+</table>
 
-This activates the 0.5 µm C5N process with the layer table, design rules, and device extractor needed for everything else.
+### XOR gate
 
-### 5. Open the cells
+<table>
+<tr>
+<td width="50%" valign="top"><img src="figures/xor_schematic.png" alt="XOR schematic"/></td>
+<td width="50%" valign="top"><img src="figures/xor_layout.png" alt="XOR layout"/></td>
+</tr>
+<tr>
+<td align="center"><em>XOR schematic</em></td>
+<td align="center"><em>XOR transistor-level layout</em></td>
+</tr>
+</table>
 
-**File → Open Cellview** &mdash; pick a library and a cell:
+### Full adder
 
-| Library    | Cell                | What it is                                         |
-|------------|---------------------|----------------------------------------------------|
-| `Training` | `inverter schem`    | CMOS inverter (schematic)                          |
-| `Training` | `inverter layout`   | CMOS inverter (transistor-level layout)            |
-| `Training` | `NAND LAYOUT`       | 2-input NAND layout                                |
-| `Training` | `NOR SCHEM` / `nor` | 2-input NOR schematic / layout                     |
-| `Training` | `AND layout`        | 2-input AND layout                                 |
-| `Training` | `OR LAYOUT`         | 2-input OR layout                                  |
-| `Training` | `XOR LAYOUT`        | 2-input XOR layout                                 |
-| `Training` | `full adder`        | **The 1-bit full adder layout**                    |
-| `Training` | `fulladder`         | The full adder schematic                           |
-| `Training` | `latch`             | SR latch                                           |
-| `Training` | `tap new in case`   | Standalone well/substrate tap cell                 |
+<table>
+<tr>
+<td width="50%" valign="top"><img src="figures/full_adder_schematic.png" alt="Full adder schematic"/></td>
+<td width="50%" valign="top"><img src="figures/full_adder_layout.png" alt="Full adder layout"/></td>
+</tr>
+<tr>
+<td align="center"><em>Full-adder schematic &mdash; composed from the verified gates</em></td>
+<td align="center"><em>Full-adder layout &mdash; the polygon-level assembly that ties out to <code>SUM</code> and <code>CARRY</code></em></td>
+</tr>
+</table>
 
-### 6. Re-run verification (optional)
+## Verification results
 
-To re-verify a cell after opening its layout:
+Every cell passes **LVS clean** &mdash; the extracted layout matches the schematic transistor-for-transistor.
 
-- **DRC:** **Verify → DRC** &mdash; Glade runs `tech/ENGR3426_mod/C5N_DRC.py` and reports violations. Output lives in `verifications/drc/`.
-- **LVS:** **Verify → LVS** &mdash; Glade extracts the layout via `tech/ENGR3426_mod/C5N_EXT_LVS.py`, then Gemini compares the result against the schematic. Output lives in `verifications/lvs/`.
+<p align="center">
+  <img src="figures/lvs_clean_full_adder.png" alt="Gemini LVS clean report for the full adder" width="600"/><br/>
+  <em>Gemini LVS engine reports a clean match on the full adder (<code>exit code 0</code>).</em>
+</p>
 
-Existing LVS reports from prior runs are in `tech/ENGR3426_mod/` as `*.lvs` files (e.g. `full adder.lvs`, `AND layout.lvs`).
-
-## The cell library
-
-The `lib/Training/` folder is the library that holds every cell I drew. Notable cells:
-
-| Cell                | View(s)                           | Description |
-|---------------------|-----------------------------------|-------------|
-| `inverter schem`    | schematic                         | CMOS inverter at the transistor level |
-| `inverter layout`   | layout, extracted                 | The hand-laid inverter — foundational cell of the library |
-| `NAND SCH`          | schematic                         | 2-input NAND schematic |
-| `NAND LAYOUT`       | layout, extracted                 | 2-input NAND layout |
-| `NOR SCHEM`         | schematic                         | 2-input NOR schematic |
-| `nor`               | schematic, layout, extracted      | 2-input NOR (full set of views) |
-| `AND SCHEM` / `and sch` | schematic                     | 2-input AND schematic (= NAND + INV) |
-| `AND layout`        | layout, extracted                 | 2-input AND layout |
-| `OR SCHEM`          | schematic                         | 2-input OR schematic (= NOR + INV) |
-| `OR LAYOUT`         | layout, extracted                 | 2-input OR layout |
-| `XOR SCHEM`         | schematic                         | 2-input XOR schematic |
-| `XOR LAYOUT`        | layout, extracted                 | 2-input XOR layout |
-| `fulladder`         | schematic                         | 1-bit full adder schematic |
-| `full adder`        | layout, extracted                 | **1-bit full adder layout** |
-| `latch`             | schematic, layout, extracted      | SR latch |
-| `tap new in case`   | layout                            | Standalone well/substrate tap cell |
-| `C5NNMOS` / `C5NPMOS` | layout, netlist                 | Custom transistor cells |
-| `grid`              | layout                            | Alignment grid (used while drawing) |
-
-Glade also auto-saves revision copies named with `$$<number>` suffixes (e.g. `C5NPMOS$$2316608855`). These are kept for traceability.
-
-## The PDK
-
-Four technology kits ship with the workspace under `tech/`:
-
-| Folder              | Use this for…                                                  |
-|---------------------|----------------------------------------------------------------|
-| **`ENGR3426_mod/`** | **Default. All gates and the full adder were built against this kit.** Contains the layer-stack file (`C5N.tch`), DRC rules (`C5N_DRC*.py`), extraction & LVS rules (`C5N_EXT_LVS.py`), and SPICE subcircuits (`engr3426.sub`). |
-| `ENGR3426/`         | The course-original C5N PDK (earlier inverter work used this). |
-| `ENGR3426_mod1/`    | An alternative PDK variant.                                    |
-| `FreePDK15/`        | FreePDK 15 nm files used for additional exploration outside the main flow. |
-
-## Design approach
-
-1. **Build the cell library bottom-up.** Start with the inverter at the polygon level — well, diffusion, poly, metal, contacts. Verify DRC, then LVS against the schematic.
-2. **Add NAND and NOR** as the next layer of primitives, reusing transistor sizes from the inverter.
-3. **Compose AND / OR / XOR** from NAND/NOR + inverter, verifying each.
-4. **Compose the full adder** from the verified gates using the standard 2-XOR / 2-AND / 1-OR realisation:
-   ```
-   sum  = a XOR b XOR c_in
-   cout = (a AND b) OR (c_in AND (a XOR b))
-   ```
-5. **Substrate / well taps** are placed inside every cell so every transistor's body terminal is tied (NMOS body → gnd, PMOS body → VDD). A standalone tap cell (`tap new in case`) is also provided to drop extra ties wherever a larger design needs them.
-6. **Run LVS on the assembled adder** &mdash; the layout extracts to a netlist topologically equivalent to the schematic.
-
-## Verification
-
-Every cell passes LVS clean &mdash; the layout extraction matches the schematic netlist transistor-for-transistor. Existing reports are stored alongside the netlists in `tech/ENGR3426_mod/`.
-
-| Cell           | Devices (after reduction) | LVS report                                                       |
-|----------------|---------------------------|------------------------------------------------------------------|
-| Inverter       | 2                         | `tech/ENGR3426_mod/inverter layout .lvs`                         |
-| NAND           | 4                         | `tech/ENGR3426_mod/NAND LAYOUT.lvs`                              |
-| NOR            | 4                         | `tech/ENGR3426_mod/NOR LAYOUT NEW.lvs`                           |
-| AND            | 6                         | `tech/ENGR3426_mod/AND layout.lvs`                               |
-| OR             | 6                         | `tech/ENGR3426_mod/OR LAYOUT.lvs`                                |
-| XOR            | 12                        | `tech/ENGR3426_mod/XOR LAYOUT.lvs`                               |
-| **Full adder** | **35** (42 before reduction) | `tech/ENGR3426_mod/full adder.lvs`                            |
+| Cell           | Devices (after reduction) | LVS report                                |
+|----------------|---------------------------|-------------------------------------------|
+| Inverter       | 2                         | [`inverter/lvs.txt`](inverter/lvs.txt)    |
+| NAND           | 4                         | [`nand/lvs.txt`](nand/lvs.txt)            |
+| NOR            | 4                         | [`nor/lvs.txt`](nor/lvs.txt)              |
+| AND            | 6                         | [`and/lvs.txt`](and/lvs.txt)              |
+| OR             | 6                         | [`or/lvs.txt`](or/lvs.txt)                |
+| XOR            | 12                        | [`xor/lvs.txt`](xor/lvs.txt)              |
+| **Full adder** | **35** (42 before reduction) | [`full_adder/lvs.txt`](full_adder/lvs.txt) |
 
 The full adder's extracted netlist contains 42 raw transistors that reduce to **35** after series/parallel collapse, with **18 internal nets** matching the schematic. Body terminals are tied for all 42 transistors (21 NMOS to `gnd`, 21 PMOS to `VDD`).
-
-## What's *not* in this repo
-
-- `glade.exe`, `gemini.exe`, `fastcap.exe`, `MetaPlacerTest0.exe` &mdash; the Glade application binaries. Install Glade yourself; it's free for academic use.
-- The embedded Python 2.7 runtime and Qt DLLs that come bundled with Glade.
-- Glade's HTML help docs and reference PDF.
-- Session log files (`glade_*.log`) &mdash; personal noise from past editing sessions.
-
-These exclusions are listed in `.gitignore`.
 
 ## Course context
 
