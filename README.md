@@ -52,28 +52,7 @@ This repo does not include the Glade application, the C5N PDK, or any Glade-ship
 - `latch/` has only `glade_cellview/{schematic, layout, extracted}` &mdash; no netlist export.
 - `tap/` has only `glade_cellview/layout` &mdash; a standalone well/substrate tap cell, no schematic counterpart.
 
-## Approach
 
-The full adder is built bottom-up from CMOS primitives:
-
-<p align="center">
-  <img src="figures/full_adder_block_diagram.jpg" alt="Full adder block-level structure" width="450"/><br/>
-  <em>Standard one-bit full adder: 2 XOR + 2 AND + 1 OR producing <code>SUM</code> and <code>CARRY</code>.</em>
-</p>
-
-```
-sum  = a XOR b XOR c_in
-cout = (a AND b) OR (c_in AND (a XOR b))
-```
-
-Each CMOS gate is laid out at the polygon level. The library is built bottom-up: NAND/NOR from inverters and series/parallel transistors, then AND = NAND + INV, OR = NOR + INV, and XOR. Below is the stick diagram used to plan the AND gate &mdash; a NAND followed by an inverter:
-
-<p align="center">
-  <img src="figures/stick_diagram_and.png" alt="Stick diagram of the AND gate (NAND + INV)" width="450"/><br/>
-  <em>Stick-diagram planning of the AND gate: a NAND with the inputs and gnd/Vdd rails, followed by an inverter.</em>
-</p>
-
-**Substrate / well taps** are placed inside every cell so every transistor's body terminal is tied (NMOS body → gnd, PMOS body → VDD). A standalone `tap` cell is also provided in [`tap/`](tap/) to drop extra ties wherever a larger design needs them.
 
 ## Gates in detail
 
