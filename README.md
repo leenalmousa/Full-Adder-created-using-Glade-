@@ -26,8 +26,11 @@ One folder per gate I built, each containing the same set of files:
 ├── or/                        # 2-input OR    (= NOR  + INV)
 ├── xor/                       # 2-input XOR
 ├── full_adder/                # 1-bit full adder built from the above
+├── tap/                       # standalone well/substrate tap cell
 └── latch/                     # SR latch (Glade cell views only — no netlist)
 ```
+
+Inside every gate folder you also get a **`glade_cellview/`** subfolder &mdash; the actual Glade binary cell-view files (`schematic`, `layout`, `extracted`) carrying the layout polygons. Open them in Glade to see / edit the geometry. They are not viewable on GitHub.
 
 Each gate folder contains:
 
