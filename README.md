@@ -46,8 +46,6 @@ This repo does not include the Glade application, the C5N PDK, or any Glade-ship
 | `glade_cellview/layout`     | Glade binary cell view  ; the layout polygon data. Only openable in Glade. |
 | `glade_cellview/extracted`  | Glade binary cell view  ; the back-extracted layout. Only openable in Glade. |
 
-> The `.cdl` and `.txt` files are plain text. The files inside `glade_cellview/` are Glade binary blobs (no file extension) that carry the polygon-level geometry  ; only Glade can open them.
-
 **Cells with a different shape:**
 - `latch/` has only `glade_cellview/{schematic, layout, extracted}`  ; no netlist export.
 - `tap/` has only `glade_cellview/layout`  ; a standalone well/substrate tap cell, no schematic counterpart.
